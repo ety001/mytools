@@ -8,6 +8,7 @@ $str = 'basd,dfas;dasdfa;sdfasdfasdf,dfs.adfa,dfa;dafsdf.asdfa;asdfa';
 The result:
 
 '''
+
 array(10) {
   [0]=>
   string(4) "basd"
@@ -30,4 +31,5 @@ array(10) {
   [9]=>
   string(5) "asdfa"
 }
+
 '''
