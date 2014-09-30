@@ -1,0 +1,95 @@
+转自：http://www.kukaka.org/home/showonews/372
+
+用了很长一段时间vim作为PHP的开发工具，以前用netbeans都是直接按ctrl然后鼠标点一下函数跳到函数定义处的，跟踪代码非常有用，刚改用vim的时候很不习惯，虽然一早就知道tag也可以实现这个功能，但是就是一直试不出来，现在，总算是比较清楚tag的工作原理了，特此记录一下，分享给和我一样搞PHP开发的而且特别喜欢vim的朋友们。
+
+由于本人工作环境是Ubuntu，所以本文测试环境也是Ubuntu。
+
+编译安装ctags
+下载地址：http://ctags.sourceforge.net/
+
+下载文件：ctags-5.8.tar.gz
+
+解压ctags：tar -zxcf ctags-5.8.tar.gz
+
+进入ctags：cd ctags-5.8
+
+打上PHP5补丁：
+
+wget http://svn.bitflux.ch/repos/public/misc/ctags-php5.patch
+
+patch php.c ctags-php5.patch
+编译安装：
+
+./configure
+
+make
+
+sudo make install
+
+经过这三步后就生成 /usr/local/bin/ctags
+
+使用ctags
+在相应的源码目录运行ctags -R产生相应的tags文件
+
+cd ~/www/website
+
+ctags -R *
+
+这时会在~/www/website目录下生成一个tags文件
+
+现在我们进入VIM，执行下面的命令：
+
+:cd ~/www/website       "切换当前目录为~/www/website
+:set tags=tags        "设置tags选项为当前目录下的tags文件
+
+现在，我们设置好了tags选项，接下来我们使用它，我们先来查找一个名叫make_html的方法：
+
+:tag make_html
+
+如果make_html方法的定义只存在一个文件中你会看到VIM打开了~/www/my_function.php文件，并把光标定位到make_html方法所在行上。
+
+如果make_html方法的定义存在多个文件中，会提示：
+
+找到 tag：1 / 14 或更多
+
+这时我们可以列出保护这个方法的所有文件
+
+:tselect        "显示列表
+
+这时会列出所有文件，让我们选择一个文件打开
+
+# pri kind tag                文件
+> 1 F C f         make_html         function/my_function.php
+   2 F     f         make_html         xxx/xxx.php
+   键入数字和回车(empty cacels) :
+
+       根据提示输入我们想查看的文件对应的序号然后回车就可以了。
+
+       :tn       "显示后一个tag到的PHP文件
+       :tp       "显示前一个tag到的PHP文件
+       :tags   "显示标签栈
+
+       我们还可以把鼠标停留在想要跳转的 类 函数 变量 上面，然后按 ctrl + ] ,回到原来位置是 ctrl + t
+
+       Tag文件格式
+       Tag文件遵循一定的格式，缺省是如下格式：
+
+{tagname} {TAB} {tagfile} {TAB} {tagaddress} {term} {field} ..
+
+{tagname}      标识符名字，例如函数名、类名、结构名、宏等。不能包含制表符。
+
+{tagfile}  包含 {tagname} 的文件。它不能包含制表符。
+
+{tagaddress}   可以定位到 {tagname}光标位置的 Ex 命令。
+
+{term}           设为“;"”。这是为了兼容Vi编辑器，使Vi忽略后面的{field}字段。
+
+{field} ..  此字段可选，通常用于表示此{tagname}的类型是函数、类、宏或是其它。
+
+在{tagname}、{tagfile}和{tagaddress}之间，采用制表符（TAB符，即C语言中的”\t”）分隔，也就是说{tagname}、{tagfile}中不能包含制表符。
+
+Tag文件的开头可以包含以“!_TAG_”开头的行，用来在tag文件中加入其它信息。VIM能够识别两种这样的标记，经常用到的是“_TAG_FILE_SORTED”标记，例如：
+
+!_TAG_FILE_SORTED1{anything}
+
+上面这个标记说明tag文件是经过排序的，并且排序时区分了大小写，对排序的tag，VIM会使用二分法来进行查找，大大加快了查找速度；如果值为0，则表示tag文件未经排序；如果值为2，则表示tag文件是忽略大小写排序的。
