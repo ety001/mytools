@@ -12,7 +12,7 @@ host_path = 'api.yeelink.net'
 def get_temp():
     out = os.popen('cat /sys/class/thermal/thermal_zone0/temp')
     r = int( out.read() )
-    return r/1000
+    return r/1000.0
 
 def post_info(info):
     data = '{ "timestamp":"", "value":'+ str(info)  +' }'
