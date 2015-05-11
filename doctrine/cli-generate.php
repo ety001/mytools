@@ -51,9 +51,95 @@ EOF;
         }
         $xml_val    = sprintf($xml, $xml_arr['entity'], $xml_arr['table'], $xml_arr['pk'], $xml_arr['pk'], $field_str);
         echo $xml_val;
+
+
+
+
+        $php = <<<EOF
+<?php
+namespace Data\Dao\;
+
+/**
+ * %s
+ */
+class %s
+{
+    /**
+     * @var integer
+     */
+    private \$id;
+
+    %s
+
+    public function __construct()
+    {
     }
 
-    create('Data\Dao\Schneider\Brand','brand','id');
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function get_id()
+    {
+        return \$this->id;
+    }
+
+    %s
+}
+
+EOF;
+
+
+        $php_field_tpl  = <<<EOF
+    /**
+     * @var %s
+     */
+    private \$%s;
+EOF;
+        $php_field_str  = '';
+        foreach ($xml_arr['list'] as $k => $v) {
+            $php_field_str .= sprintf($php_field_tpl, $v, $k);
+        }
+
+        $php_func_tpl  = <<<EOF
+    /**
+     * Set %s
+     *
+     * @param %s \$%s
+     * @return object
+     */
+    public function set_%s(\$%s)
+    {
+        \$this->%s = \$%s;
+
+        return \$this;
+    }
+
+    /**
+     * Get %s
+     *
+     * @return %s 
+     */
+    public function get_%s()
+    {
+        return \$this->%s;
+    }
+EOF;
+        $php_func_str  = '';
+        foreach ($xml_arr['list'] as $k => $v) {
+            $php_func_str .= sprintf($php_func_tpl, $k, $v, $k, $k, $k, $k, $k);
+        }
+
+
+        $php_contents = sprintf($php, $entity, ucfirst($table), ucfirst($table),  $php_field_str, $php_func_str);
+
+
+        echo "\n\n";
+        echo $php_contents;
+    }
+
+    create('Data\Dao\Bu','bu','id');
 
 
 
