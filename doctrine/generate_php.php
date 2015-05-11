@@ -12,9 +12,6 @@ $xml_data   = file_get_contents($filename);
 
 $data   = json_decode(json_encode( simplexml_load_string($xml_data, null, LIBXML_NOCDATA) ), true);
 
-
-var_dump($data);
-
 $class_namespace = $data['entity']['@attributes']['name'];
 $table_name         = $data['entity']['@attributes']['table'];
 $tmp = array();
@@ -36,4 +33,4 @@ foreach($field_arr as $k=>$v){
 $php_content = sprintf($php_tpl, $class_namespace, $class_name, $class_name, $field_str, $func_str);
 
 
-var_dump($php_content);
+file_put_contents('php/'.strtolower($class_name).'.php', $php_content);
