@@ -1,4 +1,4 @@
-colorscheme darkblue
+colorscheme peachpuff
 " 设置NerdTree
 map <F3> :NERDTreeMirror<CR>
 map <F3> :NERDTreeToggle<CR>
@@ -41,7 +41,7 @@ set incsearch                " 开启实时搜索功能
 set nowrapscan               " 搜索到文件两端时不重新搜索
 set nocompatible             " 关闭兼容模式
 set vb t_vb=                 " 关闭提示音
-set cursorline              " 突出显示当前行
+"set cursorline              " 突出显示当前行
 hi CursorLine  cterm=NONE   ctermbg=darkred ctermfg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white
 set hidden                   " 允许在有未保存的修改时切换缓冲区
