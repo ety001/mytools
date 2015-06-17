@@ -1,5 +1,5 @@
 <?php
-$name       = 'Bu';
+$name       = 'Payment';
 
 $php_tpl    = file_get_contents('php.tpl.php');
 $php_c      = file_get_contents('php_c.tpl.php');
@@ -30,7 +30,7 @@ foreach($field_arr as $k=>$v){
     $func_str .= sprintf($php_d, $t['name'], $t['type'], $t['name'], $t['name'], $t['name'], $t['name'], $t['name'], $t['name'], $t['type'], $t['name'], $t['name']);
 }
 
-$php_content = sprintf($php_tpl, $class_namespace, $class_name, $class_name, $field_str, $func_str);
+$php_content = sprintf($php_tpl, 'Data\Dao', $class_name, $class_name, $field_str, $func_str);
 
 
 file_put_contents('php/'.strtolower($class_name).'.php', $php_content);

@@ -7,7 +7,6 @@
     public function set_%s($%s)
     {
         $this->%s = $%s;
-
         return $this;
     }
 
