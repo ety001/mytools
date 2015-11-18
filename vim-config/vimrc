@@ -1,6 +1,7 @@
 colorscheme peachpuff
 " 设置NerdTree
-map <F3> :NERDTreeMirror<CR>
+au VimEnter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 map <F3> :NERDTreeToggle<CR>
 " miniBufExp
 let g:miniBufExplMapWindowNavVim = 1 
