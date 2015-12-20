@@ -13,26 +13,28 @@ Plugin 'VundleVim/Vundle.vim'
 " My Bundles here:
 Plugin 'L9'
 Plugin 'ctrlpvim/ctrlp.vim'
-Bundle 'sukima/xmledit'
 "撤销列表
 Bundle 'sjl/gundo.vim' 
 "自动配对
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'klen/python-mode'
-Bundle 'Valloric/ListToggle'
+"语法检查
 Bundle 'scrooloose/syntastic'
-Bundle 't9md/vim-quickhl'
+"目录树
+Bundle 'scrooloose/nerdtree'
+"tag
+Bundle 'taglist.vim'
+"winmanager
+Bundle 'winmanager'
+"power line
 Bundle 'Lokaltog/vim-powerline'
+"快速注释
 Bundle 'scrooloose/nerdcommenter'
 "..................................
 " vim-scripts repos
-Bundle 'YankRing.vim'
-Bundle 'vcscommand.vim'
-Bundle 'ShowPairs'
-Bundle 'SudoEdit.vim'
-Bundle 'EasyGrep'
+"Bundle 'SudoEdit.vim'
+"Bundle 'EasyGrep'
 Bundle 'VOoM'
-Bundle 'VimIM'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -80,8 +82,6 @@ set cursorline               " 突出显示当前行
 hi CursorLine  cterm=NONE   ctermbg=darkred ctermfg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white
 set hidden                   " 允许在有未保存的修改时切换缓冲区
-let g:lt_location_list_toggle_map = '<leader>l'         " ListToggle
-let g:lt_quickfix_list_toggle_map = '<leader>q'         " ListToggle
 
 " 设置编码
 set fenc=utf-8
@@ -91,3 +91,19 @@ set fileencodings=utf-8,gbk,cp936
 language messages zh_CN.utf-8
 " undo
 nnoremap <F5> :GundoToggle<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Config Winmanager
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:winManagerWindowLayout="NERDTree|TagList"
+let g:NERDTree_title="[NERDTree]"
+
+nmap <C-m> :WMToggle<CR>
+
+function! NERDTree_Start()  
+    exec 'NERDTree'  
+endfunction
+
+function! NERDTree_IsValid()  
+    return 1  
+endfunction
