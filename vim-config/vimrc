@@ -30,7 +30,8 @@ Bundle 'winmanager'
 Bundle 'Lokaltog/vim-powerline'
 "快速注释
 Bundle 'scrooloose/nerdcommenter'
-"..................................
+"buffer explorer
+Bundle 'bufexplorer.zip'
 " vim-scripts repos
 "Bundle 'SudoEdit.vim'
 "Bundle 'EasyGrep'
@@ -107,3 +108,10 @@ endfunction
 function! NERDTree_IsValid()  
     return 1  
 endfunction
+
+""""""""""""""""
+" Config BufExplorer
+""""""""""""""""
+let g:bufExplorerDefaultHelp=0       " Do not show default help.
+let g:bufExplorerShowRelativePath=1  " Show relative paths.
+let g:bufExplorerSortBy='mru'        " Sort by most recently used."
