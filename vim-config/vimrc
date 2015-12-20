@@ -96,7 +96,7 @@ nnoremap <F5> :GundoToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Config Winmanager
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:winManagerWindowLayout="NERDTree|TagList"
+let g:winManagerWindowLayout="NERDTree|TagList|Bufxplorer"
 let g:NERDTree_title="[NERDTree]"
 
 nmap <C-m> :WMToggle<CR>
@@ -114,4 +114,5 @@ endfunction
 """"""""""""""""
 let g:bufExplorerDefaultHelp=0       " Do not show default help.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
-let g:bufExplorerSortBy='mru'        " Sort by most recently used."
+let g:bufExplorerSortBy='mru'        " Sort by most recently used.
+let Tlist_File_Fold_Auto_Close=1     " 让当前不被编辑的文件的方法列表自动折叠起来
