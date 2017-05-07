@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
-$sms_path = '/tmp/sms.txt';
-$sms_hash_path = '/tmp/sms_hash.txt';
+$sms_path = '/tmp/wx.txt';
+$sms_hash_path = '/tmp/wx_hash.txt';
 while(1){
     $tmp_file = file_get_contents($sms_path);
     $hash = md5($tmp_file);
@@ -14,8 +14,11 @@ while(1){
     }
     
     if($hash != $hash_last){
-        system('/usr/sbin/sendmail -t < /tmp/sms.txt');
+        echo 'send'."\n";
+        system('/usr/local/bin/wx_msg "'.$tmp_file.'"');
         file_put_contents($sms_hash_path, $hash);
+    } else {
+        echo 'not send|'.$hash.'|'.$hash_last;
     }
     sleep(10);
 }
